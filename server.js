@@ -1,13 +1,14 @@
 // server.js
 
 // set up ======================================================================
-// get all the tools we need
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
+var favicon  = require('express-favicon');
 var flash    = require('connect-flash');
+var upload = require('express-fileupload');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -28,6 +29,49 @@ app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs'); // set up ejs for templating
+
+// adding favicon
+app.use(favicon(__dirname + '/public/favicon.png'));
+
+// upload files
+app.use(upload({
+  limits: {fileSize: 200}
+}));
+
+app.get("profile",function(req,res){
+  res.sendFile(__dirname+"/profile.ejs");
+})
+
+app.post('/', function(req, res) {
+  if (req.files) {
+    var file = req.files.filename,
+      filename = file.name;
+    file.mv("./upload/" + filename, function(err) {
+      if(err) {
+        console.log(err)
+        res.send("error occured")
+      }
+      else {
+        res.send("Done!")
+      }
+    })
+  }
+})
+
+//display files
+var fs = require('fs');
+fs.readdir('./upload', function (err, files) {
+  if (err) throw err;
+
+  var filenames = [];
+  for (var index in files) {
+    console.log(files[index]);
+    filenames.push(files[index]);
+  }
+
+  // do something with "filenames"
+  // ['file1.js', 'file2.js', 'file3.js']
+});
 
 // required for passport
 app.use(session({
