@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var favicon  = require('express-favicon');
 var flash    = require('connect-flash');
-var upload = require('express-fileupload');
+var upload   = require('express-fileupload');
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -35,18 +35,18 @@ app.use(favicon(__dirname + '/public/favicon.png'));
 
 // upload files
 app.use(upload({
-  limits: {fileSize: 200}
+  limits: {fileSize: 50 * 1024 * 1024 },
 }));
 
 app.get("profile",function(req,res){
   res.sendFile(__dirname+"/profile.ejs");
 })
 
-app.post('/', function(req, res) {
+app.post('/upload', function(req, res) {
   if (req.files) {
     var file = req.files.filename,
       filename = file.name;
-    file.mv("./upload/" + filename, function(err) {
+    file.mv("./uploads/" + filename, function(err) {
       if(err) {
         console.log(err)
         res.send("error occured")
@@ -60,7 +60,7 @@ app.post('/', function(req, res) {
 
 //display files
 var fs = require('fs');
-fs.readdir('./upload', function (err, files) {
+fs.readdir('./uploads', function (err, files) {
   if (err) throw err;
 
   var filenames = [];
@@ -75,7 +75,7 @@ fs.readdir('./upload', function (err, files) {
 
 // required for passport
 app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch', // session secret
+    secret: 'shelovesit', // session secret
     resave: true,
     saveUninitialized: true
 }));

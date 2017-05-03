@@ -1,18 +1,17 @@
+<% var page = "profile" %>
 <% include partials/header %>
 <div class="container">
-
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
     <div class="jumbotron text-center">
-      <form method="post" enctype="multipart/form-data" action="/">
+      <form method="post" enctype="multipart/form-data" action="/upload" id="uploadForm" ref="uploadForm">
         <label class="control-label">Select file to upload</label>
-        <input type="file" class="filestyle" name="filename">
-        <input type="submit" value="Upload">
+        <input type="file" name="sampleFile">
+        <input type="submit" value="Upload!">
       </form>
     </div>
-
 </div>
 <% include partials/footer %>

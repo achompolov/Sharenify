@@ -1,14 +1,42 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+  <title>Sharenify</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Latest FontAwesome -->
+  <script src="https://use.fontawesome.com/1059983369.js"></script>
+
   <link rel="icon" href="/favicon.png" type="image/x-icon">
-  
-    <title>Sharenify</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <style>
-        body         { padding-top:80px; }
-    </style>
+  <style>
+    body { padding-top: 70px; }
+  </style>
 </head>
 <body>
+  <% if (page == "profile") { %>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <p class="navbar-text">
+        Welcome,
+        <% if (user.local.email) { %>
+          <%= user.local.email %>
+        <% } else if (user.facebook.token) { %>
+          <%= user.facebook.name %>
+        <% } else if (user.twitter.token) { %>
+          <%= user.twitter.displayName %>
+        <% } else if (user.google.token) { %>
+          <%= user.google.name %>
+        <% } %>
+      </p>
+    </nav>
+  <% } else { %>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <ul class="nav nav-pills nav-justified">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+      </ul>
+    </nav>
+  <% } %>
