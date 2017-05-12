@@ -7,11 +7,16 @@
     </div>
 
     <div class="jumbotron text-center">
-      <form method="post" enctype="multipart/form-data" action="/upload" id="uploadForm" ref="uploadForm">
-        <label class="control-label">Select file to upload</label>
-        <input type="file" name="sampleFile">
-        <input type="submit" value="Upload!">
-      </form>
+       <form method="POST" enctype="multipart/form-data" action="/upload">
+          <input type="file" name="filefield"><br />
+          <input type="submit" value="Upload">
+        </form>
+
+      <!-- <form method="post" enctype="multipart/form-data" action="/upload">
+        <label class="control-label">Select File</label>
+        <input type="file" class="filestyle" name="filename" data-buttonName="btn-primary">
+        <input type="submit" value="Upload">
+      </form> -->
     </div>
 </div>
 <% include partials/footer %>

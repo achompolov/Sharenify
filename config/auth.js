@@ -20,8 +20,8 @@ module.exports = {
     },
 
     'googleAuth' : {
-        'clientID'         : '960159422480-v57unhi6p5s4ommafep1b65skgq4bi64.apps.googleusercontent.com',
-        'clientSecret'     : 'EPv2YJr69i1uwJNAIf2TtMi4',
+        'clientID'         : '581483099704-971t6rfahv5rh28bjnn8pcp1op8g06l3.apps.googleusercontent.com',
+        'clientSecret'     : '4duA9KrBFiO1_LaDau_dPisa',
         //'callbackURL'      : 'http://sharenify.com/auth/google/callback'
         'callbackURL'      : 'http://localhost:8080/auth/google/callback'
     }
